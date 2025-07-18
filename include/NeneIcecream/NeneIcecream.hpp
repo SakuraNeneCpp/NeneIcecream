@@ -43,8 +43,9 @@ void print_value(std::ostream& os, T&& v) {
 template<class T>
 T&& ic_impl(const char* expr_str, const char* file, int line, T&& value) {
     std::ostream& os = *out_stream();
-    os << "[" << file << ":" << line << "] "
-       << expr_str << " = ";
+    os
+    << "ic [" << file << ":" << line << "] "
+    << expr_str << " = ";
     print_value(os, value);
     os << '\n';
     return std::forward<T>(value);
@@ -52,4 +53,4 @@ T&& ic_impl(const char* expr_str, const char* file, int line, T&& value) {
 
 } // namespace dbg
 
-#define nnic(expr) ::dbg::ic_impl(#expr, __FILE__, __LINE__, (expr))
+#define ic(expr) ::dbg::ic_impl(#expr, __FILE__, __LINE__, (expr))
