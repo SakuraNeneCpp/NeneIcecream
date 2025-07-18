@@ -1,0 +1,7 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# (依存があれば find_dependency(...))
+
+include("${CMAKE_CURRENT_LIST_DIR}/NeneIcecreamTargets.cmake")
