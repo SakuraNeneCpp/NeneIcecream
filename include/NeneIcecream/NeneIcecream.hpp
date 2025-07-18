@@ -25,6 +25,14 @@ inline constexpr bool is_streamable_v = is_streamable<T>::value;
 
 namespace dbg {
 
+constexpr const char* basename(const char* path) noexcept {
+    const char* last = path;
+    for (const char* p = path; *p; ++p) {
+        if (*p == '/' || *p == '\\') { last = p + 1; }
+    }
+    return last;
+}
+
 inline std::ostream*& out_stream() {
     static std::ostream* s = &std::cout;
     return s;
@@ -53,4 +61,4 @@ T&& ic_impl(const char* expr_str, const char* file, int line, T&& value) {
 
 } // namespace dbg
 
-#define ic(expr) ::dbg::ic_impl(#expr, __FILE__, __LINE__, (expr))
+#define ic(expr) ::dbg::ic_impl(#expr, ::dbg_detail::basename(__FILE__), __LINE__, (expr))
