@@ -5,6 +5,15 @@
 
 namespace dbg_detail {
 
+constexpr const char* basename(const char* path) noexcept {
+    const char* last = path;
+    for (const char* p = path; *p; ++p) {
+        if (*p == '/' || *p == '\\') { last = p + 1; }
+    }
+    return last;
+}
+
+
 // yes/no テスト用
 template<class...> using void_t = void;
 
@@ -25,13 +34,6 @@ inline constexpr bool is_streamable_v = is_streamable<T>::value;
 
 namespace dbg {
 
-constexpr const char* basename(const char* path) noexcept {
-    const char* last = path;
-    for (const char* p = path; *p; ++p) {
-        if (*p == '/' || *p == '\\') { last = p + 1; }
-    }
-    return last;
-}
 
 inline std::ostream*& out_stream() {
     static std::ostream* s = &std::cout;
