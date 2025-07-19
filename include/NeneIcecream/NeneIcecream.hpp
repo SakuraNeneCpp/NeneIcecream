@@ -61,6 +61,12 @@ T&& ic_impl(const char* expr_str, const char* file, int line, T&& value) {
     return std::forward<T>(value);
 }
 
+void ic_section_impl(const char* title){
+    std::cout << "# " << title << std::endl;
+    std::cout << "----------------------------------------" << std::endl;
+}
+
 } // namespace dbg
 
 #define ic(expr) ::dbg::ic_impl(#expr, ::dbg_detail::basename(__FILE__), __LINE__, (expr))
+#define ic_section(title) ::dbg::ic_section_impl(title)

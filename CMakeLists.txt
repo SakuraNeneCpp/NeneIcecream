@@ -17,6 +17,19 @@ target_compile_features(NeneIcecream INTERFACE cxx_std_17)  # 17でOK
 # 名前空間エイリアス（推奨）※ 便利にするための IMPORTED エイリアス
 add_library(NeneIcecream::NeneIcecream ALIAS NeneIcecream)
 
+# ここから: テスト用の分岐(直接このリポジトリを開いたときのみ有効)
+if( (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) )
+    option(NENEICECREAM_BUILD_TESTS "Build NeneIcecream tests" ON)
+else()
+    option(NENEICECREAM_BUILD_TESTS "Build NeneIcecream tests" OFF)
+endif()
+
+if(NENEICECREAM_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+# ここまで
+
 # ===== インストール設定 =====
 include(GNUInstallDirs)
 
