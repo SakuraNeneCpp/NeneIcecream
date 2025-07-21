@@ -37,3 +37,23 @@ ic [test.cpp:6] a + b = 5
 ic [test.cpp:7] c = 5
 ```
 関数 `ic()` は戻り値として入力された式の結果を返します.
+
+## 導入
+最も簡単な導入方法は `git submodule` です. プロジェクトフォルダの直下で以下を実行してください:
+```bash
+git submodule add https://github.com/SakuraNeneCpp/NeneIcecream.git extern/NeneIcecream
+git submodule update --init --recursive
+```
+このリポジトリが更新された場合は, 2行目の `git submodule update --init --recursive` を再度実行すれば最新版に更新されます.  
+includeは上のサンプルコードのように, `#include <NeneIcecream/NeneIcecream.hpp>` と書くだけです.  
+CMakeLists.txtは以下のようになります:  
+```cmake
+(前略)
+
+add_subdirectory(extern/NeneIcecream)
+
+add_executable(test_ic tests/test_ic.cpp)
+target_link_libraries(test_ic
+    PRIVATE
+        NeneIcecream::NeneIcecream)
+```
