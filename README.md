@@ -49,8 +49,9 @@ includeは上のサンプルコードのように, `#include <NeneIcecream/NeneI
 CMakeLists.txtは以下のようになります:  
 ```cmake
 (前略)
+set(EXTERN_DIR "${PROJECT_SOURCE_DIR}/extern")
 
-add_subdirectory(extern/NeneIcecream)
+add_subdirectory("${EXTERN_DIR}/NeneIcecream" "${CMAKE_CURRENT_BINARY_DIR}/_icecream")
 
 add_executable(test_ic tests/test_ic.cpp)
 target_link_libraries(test_ic
